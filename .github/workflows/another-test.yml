@@ -1,8 +1,21 @@
-core-test:
-  strategy:
-    matrix:
-      python-version: [3.7, 3.8]
-        test-path: 
+name: CI
+
+on: push
+
+jobs:
+  commit-lint:
+    runs-on: self-hosted
+    steps:
+      - run: echo "in commit-lint" step
+
+  core-test:
+    needs: commit-lint
+    runs-on: self-hosted
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: [3.7]
+        test-path:
           - tests/integration/multimodal/
           - tests/integration/optimizers/
           - tests/integration/ref_indexer/
@@ -10,7 +23,10 @@ core-test:
           - tests/unit/clients/
           - tests/unit/docker/
           - tests/unit/drivers/
-          - # all subfolders here ...
     steps:
-      run: sleep 10
-      run: echo ${{ matrix.test-path }}
+      - uses: actions/checkout@v2
+      - name: Test
+        id: test
+        run: |
+          echo "starting"
+          echo "${{ matrix.test-path }}"
