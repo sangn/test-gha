@@ -29,4 +29,5 @@ jobs:
         id: test
         run: |
           echo "starting"
+          sleep 10
           echo "${{ matrix.test-path }}"
