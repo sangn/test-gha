@@ -2,7 +2,7 @@ name: Sample Run Max 2 Jobs In Parallel
 on: push
 jobs:
   job1:
-    runs-on: gh-runner
+    runs-on: self-hosted
     strategy:
       max-parallel: 2 
       matrix:
