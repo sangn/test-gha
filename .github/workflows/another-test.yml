@@ -1,0 +1,16 @@
+core-test:
+  strategy:
+    matrix:
+      python-version: [3.7, 3.8]
+        test-path: 
+          - tests/integration/multimodal/
+          - tests/integration/optimizers/
+          - tests/integration/ref_indexer/
+          - tests/integration/sharding/
+          - tests/unit/clients/
+          - tests/unit/docker/
+          - tests/unit/drivers/
+          - # all subfolders here ...
+    steps:
+      run: sleep 10
+      run: echo ${{ matrix.test-path }}
