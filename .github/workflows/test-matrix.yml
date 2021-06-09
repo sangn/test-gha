@@ -1,0 +1,14 @@
+name: Sample Run Max 2 Jobs In Parallel
+on: push
+jobs:
+  job1:
+    runs-on: gh-runner
+    strategy:
+      max-parallel: 2 
+      matrix:
+        run: ['run1', 'run2', 'run3']
+    steps:
+    - run: echo Run ${{ matrix.run }}
+    - run: date
+    - run: sleep 5 
+    - run: date
